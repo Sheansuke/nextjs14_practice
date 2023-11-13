@@ -1,9 +1,9 @@
-import { lusitana } from "@/app/ui/fonts";
+import { lusitana } from "@/src/ui/fonts";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import styles from "@/app/ui/home.module.css";
+import styles from "@/src/ui/home.module.css";
 
 import Link from "next/link";
-import AcmeLogo from "./ui/acme-logo";
+import AcmeLogo from "@/src/ui/acme-logo";
 import Image from "next/image";
 export default function Page() {
   return (
