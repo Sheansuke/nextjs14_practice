@@ -1,5 +1,5 @@
 interface NetworkResponse<T> {
-    errorResponse: String,
-    errorDescription: String,
+    errorResponse: string,
+    errorDescription: string,
     response: T
 }
