@@ -7,21 +7,44 @@ import { z } from "zod";
 
 const InvoiceSchema = z.object({
   id: z.string(),
-  customerId: z.string(),
-  amount: z.coerce.number(),
-  status: z.enum(["pending", "paid"]),
+  customerId: z.string({
+    invalid_type_error: "Please select a customer",
+  }),
+  amount: z.coerce.number().gt(0, {
+    message: "Please put a number greater than $0",
+  }),
+  status: z.enum(["pending", "paid"], {
+    invalid_type_error: "Please select a status",
+  }),
   date: z.string(),
 });
 
 const UpdateInvoiceSchema = InvoiceSchema.omit({ id: true, date: true });
 
-export const updateInvoice = async (id: string, formData?: FormData) => {
-  const { amount, customerId, status } = UpdateInvoiceSchema.parse({
+export type State = {
+  errors?: {
+    customerId?: string[];
+    amount?: string[];
+    status?: string[];
+  };
+  message: string | null;
+};
+
+export const updateInvoice = async (id: string, prevState: State, formData?: FormData) => {
+  const validateFields = UpdateInvoiceSchema.safeParse({
     customerId: formData?.get("customerId"),
     amount: formData?.get("amount"),
     status: formData?.get("status"),
   });
 
+  if (!validateFields.success) {
+    return {
+      errors: validateFields.error.flatten().fieldErrors,
+      message: "Error trying update invoice",
+    };
+  }
+
+  const { amount, customerId, status } = validateFields.data;
   const amountInCents = amount * 100;
 
   try {
