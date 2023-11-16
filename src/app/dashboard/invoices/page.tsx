@@ -6,6 +6,11 @@ import InvoicesTable from "@/src/ui/invoices/table";
 import { InvoicesTableSkeleton } from "@/src/ui/skeletons";
 import Pagination from "@/src/ui/invoices/pagination";
 import { fetchInvoicesPages } from "@/src/lib/data";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 export default async function  InvoicesPage({
   searchParams,
