@@ -3,7 +3,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start",
+    "start": "node startApp.js",
     "seed": "node -r dotenv/config ./scripts/seed.js",
     "lint": "next lint"
   },
@@ -15,6 +15,7 @@
     "autoprefixer": "10.4.15",
     "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
+    "express": "^4.18.2",
     "next": "^14.0.0",
     "next-auth": "^5.0.0-beta.3",
     "postcss": "8.4.31",
@@ -32,6 +33,7 @@
     "dotenv": "^16.3.1",
     "eslint": "^8.52.0",
     "eslint-config-next": "^14.0.0",
+    "msw": "^2.0.14",
     "prettier": "^3.0.3"
   },
   "engines": {
